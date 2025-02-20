@@ -8,12 +8,21 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+app.use(cors({
+    origin: "*",
+}));
 
+// MongoDB Connection
+mongoose.connect("mongodb+srv://javapython5750:soloprime9@abdikansh.5ae2w.mongodb.net/?retryWrites=true&w=majority&appName=Abdikansh")
+
+
+
+.then((result) => {
+    console.log("Connected to Database");
+})
+.catch((error) => {
+    console.log("Not Connected to Database");
+})
 // Schema for Gas Level History
 const GasSchema = new mongoose.Schema({
   image: String, // Store Image URL
