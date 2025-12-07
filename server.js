@@ -10,8 +10,8 @@ require("dotenv").config();
 app.use(express.json());
 
 app.use(cors({
-    origin: ["http://localhost:3000"]
-}))
+  origin: ['https://computer-xrfg.vercel.app', 'https://www.fondpeace.com', 'http://localhost:3000', "http://localhost:8081"]
+}));
 
 app.get("/",async(req,res)=> {
     res.json("Hello Deaedr");
@@ -19,5 +19,6 @@ app.get("/",async(req,res)=> {
 
 app.use("/", Product)
 app.use("/", User);
+
 
 app.listen(4000,console.log("Hello Dear"));
