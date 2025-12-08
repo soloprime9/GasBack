@@ -171,7 +171,21 @@ router.post(
 
       body.slug = slug;
 
-      body.social = body.social ? JSON.parse(body.social) : {};
+      body.social = body.social ? JSON.parse(body.social) : {
+  twitter: "",
+  facebook: "",
+  linkedin: "",
+  youtube: "",
+  instagram: "",
+  discord: "",
+  github: ""
+};
+
+body.websiteUrl = body.websiteUrl || "";
+body.playStoreLink = body.playStoreLink || "";
+body.appStoreLink = body.appStoreLink || "";
+body.chromeExtension = body.chromeExtension || "";
+
       body.team = body.team ? JSON.parse(body.team) : [];
 
       const product = await Product.create(body);
@@ -505,3 +519,4 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
