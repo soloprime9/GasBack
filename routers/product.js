@@ -203,20 +203,40 @@ body.chromeExtension = body.chromeExtension || "";
 // ================= GET SINGLE PRODUCT =================
 router.get("/hello/:slug", async (req, res) => {
   try {
-    const product = await Product.findOne({slug: req.params.slug})
+    const product = await Product.findOne({ slug: req.params.slug })
       .populate("category")
       .populate("tags")
       .populate("plans")
       .populate("seo")
       .populate("location")
       .populate("createdBy", "username email avatar");
-    if (!product)
+
+    if (!product) {
       return res.status(404).json({ ok: false, error: "Product not found" });
-    res.json({ ok: true, product });
+    }
+
+    // find related without including same product
+    const related = await Product.find({
+      _id: { $ne: product._id }, 
+      $or: [
+        { category: product.category },
+        { tags: { $in: product.tags } }
+      ]
+    })
+      .limit(6)
+      .populate("createdBy", "username avatar email");
+
+    return res.json({
+      ok: true,
+      product,
+      related
+    });
+
   } catch (err) {
-    res.status(500).json({ ok: false, error: err.message });
+    return res.status(500).json({ ok: false, error: err.message });
   }
 });
+
 
 router.get("/get/mango", async(req, res) => {
 
@@ -519,4 +539,5 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
