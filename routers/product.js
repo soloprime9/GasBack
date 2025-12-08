@@ -222,7 +222,7 @@ router.get("/hello/:slug", async (req, res) => {
       .populate("createdBy")
       .sort({ createdAt: -1 })   // latest first
       .limit(6)                  // only 6
-      .select("title slug thumbnail category"); // optimize
+      .select("title slug thumbnail category description"); // optimize
 
     res.json({
       ok: true,
@@ -536,6 +536,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
