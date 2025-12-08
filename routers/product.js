@@ -211,32 +211,28 @@ router.get("/hello/:slug", async (req, res) => {
       .populate("location")
       .populate("createdBy", "username email avatar");
 
-    if (!product) {
+    if (!product)
       return res.status(404).json({ ok: false, error: "Product not found" });
-    }
 
-    // find related without including same product
+    // GET RELATED PRODUCTS
     const related = await Product.find({
-      _id: { $ne: product._id }, 
-      $or: [
-        { category: product.category },
-        { tags: { $in: product.tags } }
-      ]
-    })
-      .limit(6)
-      .populate("createdBy", "username avatar email");
+      _id: { $ne: product._id },  // remove itself
+       
+    }).populate("category")
+      .sort({ createdAt: -1 })   // latest first
+      .limit(6)                  // only 6
+      .select("title slug thumbnail category"); // optimize
 
-    return res.json({
+    res.json({
       ok: true,
       product,
-      related
+      related,
     });
-
+    
   } catch (err) {
-    return res.status(500).json({ ok: false, error: err.message });
+    res.status(500).json({ ok: false, error: err.message });
   }
 });
-
 
 router.get("/get/mango", async(req, res) => {
 
@@ -539,5 +535,6 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
