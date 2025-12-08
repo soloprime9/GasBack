@@ -219,6 +219,7 @@ router.get("/hello/:slug", async (req, res) => {
       _id: { $ne: product._id },  // remove itself
        
     }).populate("category")
+      .populate("createdBy")
       .sort({ createdAt: -1 })   // latest first
       .limit(6)                  // only 6
       .select("title slug thumbnail category"); // optimize
@@ -535,6 +536,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
