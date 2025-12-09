@@ -235,17 +235,41 @@ router.get("/hello/:slug", async (req, res) => {
   }
 });
 
-router.get("/get/mango", async(req, res) => {
-
+router.get("/get/mango", async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 12;
+    const skip = (page - 1) * limit;
 
-    const product = await Product.find();
-    
-    res.status(201).json(product);
+    const total = await Product.countDocuments();
+
+    const products = await Product.find()
+      .populate("category")
+      .populate("tags")
+      .populate("plans")
+      .populate("seo")
+      .populate("location")
+      .populate("createdBy", "username email avatar")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      ok: true,
+      page,
+      limit,
+      total,
+      hasMore: page * limit < total,
+      products
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      error: error.message,
+    });
   }
-  catch(error){
-    res.status(500).json(error);  }
-})
+});
 
 // ================= GET ALL CATEGORIES =================
 router.get("/categories/all", async (req, res) => {
@@ -536,6 +560,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
