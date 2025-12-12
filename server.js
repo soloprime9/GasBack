@@ -2,6 +2,7 @@ const express = require("express");
 const connection = require("./connection");
 const Product = require("./routers/product");
 const User = require("./routers/user");
+const Job = request("/routes/Job");
 const cors = require("cors");
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/",async(req,res)=> {
 
 app.use("/", Product)
 app.use("/", User);
-
+app.use("/", Job);
 
 app.listen(4000,console.log("Hello Dear"));
+
