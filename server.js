@@ -5,7 +5,7 @@ const User = require("./routers/user");
 const Job = require("./routers/Job");
 const cors = require("cors");
 const app = express();
-
+ 
 require("dotenv").config();
 
 app.use(express.json());
@@ -23,6 +23,7 @@ app.use("/", User);
 app.use("/job", Job);
 
 app.listen(4000,console.log("Hello Dear"));
+
 
 
 
