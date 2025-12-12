@@ -1,5 +1,5 @@
 const { Schema, model } = require("../connection");
- 
+
 const JobSchema = new Schema(
   {
     companyName: { type: String, required: true },
@@ -12,7 +12,7 @@ const JobSchema = new Schema(
     salaryType: {
       type: String,
       enum: ["Monthly", "Yearly", "Hourly"],
-      required: true
+      required: true,
     },
 
     salaryRange: { type: String, required: true },
@@ -24,13 +24,13 @@ const JobSchema = new Schema(
     jobType: {
       type: String,
       enum: ["Full-Time", "Part-Time", "Remote", "Hybrid", "Contract"],
-      required: true
+      required: true,
     },
 
     experienceLevel: {
       type: String,
       enum: ["Fresher", "Junior", "Mid-Level", "Senior", "Lead"],
-      required: true
+      required: true,
     },
 
     category: { type: String, required: true },
@@ -39,7 +39,7 @@ const JobSchema = new Schema(
 
     isRemote: { type: Boolean, default: false },
 
-    postedDate: { type: Date, default: Date.now }
+    postedDate: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );
