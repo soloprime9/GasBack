@@ -20,9 +20,10 @@ app.get("/",async(req,res)=> {
 
 app.use("/", Product)
 app.use("/", User);
-app.use("/", Job);
+app.use("/job", Job);
 
 app.listen(4000,console.log("Hello Dear"));
+
 
 
 
