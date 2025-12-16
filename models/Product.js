@@ -7,7 +7,10 @@ const ProductSchema = new Schema({
     description: { type: String, required: true },
     longDescription: String,
 
-    thumbnail: String,
+    thumbnail: {
+    type: String,
+    required: true // This enforces the field to be present
+  },
     gallery: [String],
     videoDemo: String,
 
@@ -85,3 +88,4 @@ const ProductSchema = new Schema({
 }, { timestamps: true });
 
 module.exports = model("Product", ProductSchema);
+
