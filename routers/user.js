@@ -100,4 +100,21 @@ router.get("/me", verifyToken, async (req, res) => {
   res.json(user);
 });
 
+
+router.get("/mango/users", async (req, res) => {
+    
+    try{
+    const Users = await User.find();
+   
+     res.status(200).json(Users);
+    
+    console.log("UserId:", req.user.UserId, "Users: ", Users.length );
+
+        console.log(Users);
+    }
+    catch(error) {
+        res.status(500).json("Error Fetching Data");
+      }
+})
 module.exports = router;
+
