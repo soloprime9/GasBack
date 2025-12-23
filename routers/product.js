@@ -52,8 +52,22 @@ router.post(
   async (req, res) => {
     console.log("something wromg", req.user)
     try {
-      const user = await User.findById(req.user.UserId);
-      if (!user) return res.status(401).json({ ok: false, error: "Invalid user" });
+      const userId = req.user?.UserId;
+console.log("Decoded UserId from token:", userId);
+
+if (!userId) {
+  console.error("UserId missing in token");
+  return res.status(401).json({ error: "UserId missing in token" });
+}
+
+const user = await User.findById(userId);
+console.log("User Data from DB:", user);
+
+if (!user) {
+  console.error("User not found in DB for ID:", userId);
+  return res.status(404).json({ error: "User not found" });
+}
+
 
       const body = req.body;
       console.log("body data: ", body);
@@ -565,6 +579,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
