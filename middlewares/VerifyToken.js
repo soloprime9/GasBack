@@ -19,7 +19,7 @@ function verifyToken(req, res, next) {
 
   } catch (err) {
     res.status(401).json({ error: "Invalid token" });
-    console.log(err);
+    console.log("token error: ",err);
   }
 }
 
@@ -31,3 +31,4 @@ function isAdmin(req, res, next) {
 }
 
 module.exports = { verifyToken, isAdmin };
+
