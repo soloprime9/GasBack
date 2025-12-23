@@ -41,6 +41,9 @@ const upload = multer({
 
 
 
+
+
+
 // CREATE PRODUCT
 router.post(
   "/create",
@@ -52,7 +55,7 @@ router.post(
   async (req, res) => {
     console.log("something wromg", req.user)
     try {
-      const userId = req.user?.UserId;
+      const userId = req.user?.id;
 console.log("Decoded UserId from token:", userId);
 
 if (!userId) {
@@ -579,6 +582,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
