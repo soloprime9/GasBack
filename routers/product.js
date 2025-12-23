@@ -52,7 +52,7 @@ router.post(
   async (req, res) => {
     console.log("something wromg", req.user)
     try {
-      const user = await User.findById(req.user.id);
+      const user = await User.findById(req.user.UserId);
       if (!user) return res.status(401).json({ ok: false, error: "Invalid user" });
 
       const body = req.body;
@@ -565,6 +565,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
