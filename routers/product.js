@@ -197,7 +197,7 @@ body.chromeExtension = body.chromeExtension || "";
 
       return res.status(201).json({ ok: true, product });
     } catch (err) {
-      console.error("Error is here: ", err);
+      console.log("Error is here: ", err);
       return res.status(500).json({ ok: false, error: err.message });
     }
   }
@@ -565,6 +565,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
