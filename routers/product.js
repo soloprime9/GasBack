@@ -39,6 +39,8 @@ const upload = multer({
   })
 });
 
+
+
 // CREATE PRODUCT
 router.post(
   "/create",
@@ -48,6 +50,7 @@ router.post(
     { name: "gallery", maxCount: 1 },
   ]),
   async (req, res) => {
+    console.log("something wromg")
     try {
       const user = await User.findById(req.user.id);
       if (!user) return res.status(401).json({ ok: false, error: "Invalid user" });
@@ -562,6 +565,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
