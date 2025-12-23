@@ -53,6 +53,7 @@ router.post(
       if (!user) return res.status(401).json({ ok: false, error: "Invalid user" });
 
       const body = req.body;
+      console.log("body data: ", body);
 
       // ❌ FRONTEND SEO NOT ALLOWED (REMOVE)
       // Backend auto SEO using title + description
@@ -188,11 +189,12 @@ body.chromeExtension = body.chromeExtension || "";
 
       body.team = body.team ? JSON.parse(body.team) : [];
 
+      console.log("aal is fine: ")
       const product = await Product.create(body);
 
       return res.status(201).json({ ok: true, product });
     } catch (err) {
-      console.error(err);
+      console.error("Error is here: ", err);
       return res.status(500).json({ ok: false, error: err.message });
     }
   }
@@ -560,6 +562,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
