@@ -55,7 +55,7 @@ router.post(
   async (req, res) => {
     console.log("something wromg", req.user)
     try {
-      const userId = req.user?.id;
+      const userId = req.user?.UserId;
 console.log("Decoded UserId from token:", userId);
 
 if (!userId) {
@@ -582,6 +582,7 @@ module.exports = router;
 // });
 
 // module.exports = router;
+
 
 
 
