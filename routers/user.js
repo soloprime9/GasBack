@@ -16,7 +16,7 @@ const SECRET = process.env.JWT_SECRET;
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
+    console.log(username,email,password);
     // Check if email already exists
     const exists = await User.findOne({ email });
     if (exists) {
@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
       user,
     });
   } catch (error) {
-    res.status(500).json({ message: "Register error", error });
+    res.status(500).json({  error });
   }
 });
 
@@ -120,5 +120,6 @@ router.get("/mango/users", async (req, res) => {
 
 
 module.exports = router;
+
 
 
